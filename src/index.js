@@ -9,6 +9,7 @@ const pkg = require("../package.json");
  * @returns {undefined}
  */
 export default async function register(app) {
+  console.log("---------API_PLUGIN_CMS------------")
   await app.registerPlugin({
     label: pkg.label,
     name: pkg.name,

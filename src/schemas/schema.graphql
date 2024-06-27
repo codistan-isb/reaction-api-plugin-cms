@@ -1,0 +1,38 @@
+type pages {
+  _id: String
+  page_title: String!
+  content: JSON!
+}
+
+input pagesInput {
+  page_title: String!
+  content: JSON!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input updatePageInput {
+  page_title: String!
+  content: JSON!
+}
+
+type getPageTitle {
+  status: Boolean
+  message: String
+  getPageTitle: pages
+}
+
+type updatedPage {
+  status: Boolean
+  message: String
+  updatedPage: pages
+}
+
+extend type Mutation {
+  createPage(input: pagesInput!): pages
+  updatePageByTitle(input: updatePageInput): updatedPage
+}
+
+extend type Query {
+  getPageByTitle(page_title: String!): getPageTitle
+}

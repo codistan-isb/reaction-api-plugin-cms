@@ -1,4 +1,8 @@
 import { createRequire } from "module";
+import mutations from "./mutations/index.js";
+import queries from "./queries/index.js";
+import schemas from "./schemas/index.js";
+import resolvers from "./resolvers/index.js";
 
 const require = createRequire(import.meta.url);
 const pkg = require("../package.json");
@@ -9,10 +13,23 @@ const pkg = require("../package.json");
  * @returns {undefined}
  */
 export default async function register(app) {
-  console.log("---------API_PLUGIN_CMS------------")
+  console.log("---------API_PLUGIN_CMS------------");
   await app.registerPlugin({
     label: pkg.label,
     name: pkg.name,
-    version: pkg.version
+    version: pkg.version,
+    collections: {
+      Pages: {
+        name: "Pages",
+        updatedAt: { type: Date, default: Date.now },
+        createdAt: { type: Date, default: Date.now }
+      }
+    },
+    graphQL: {
+      schemas,
+      resolvers
+    },
+    mutations,
+    queries,
   });
 }

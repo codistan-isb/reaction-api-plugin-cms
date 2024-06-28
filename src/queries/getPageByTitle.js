@@ -8,6 +8,7 @@ export default async function getPageByTitle(context, args) {
 
     let responsePage = await Pages.findOne({
         page_title
+
     });
 
     if (responsePage) {

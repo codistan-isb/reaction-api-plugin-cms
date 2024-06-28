@@ -7,11 +7,11 @@ export default async function updatePageByTitle(context, input) {
         throw new ReactionError("access-denied", "Please login first");
     }
     const { Pages } = collections;
-    const { page_title, content } = input;
+    const { page_title, title, description, content } = input;
 
     const updatedPage = await Pages.findOneAndUpdate(
         { page_title },
-        { $set: { content, updatedAt: new Date() } },
+        { $set: { title, description, content, updatedAt: new Date() } },
         { returnOriginal: false }
     );
 
